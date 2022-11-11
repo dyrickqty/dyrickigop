@@ -5,18 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace FrmBasicThreadLobusta
+namespace WindowsFormsApp2
 {
     class MyThreadClass
     {
         public static void Thread1()
         {
-            for (int loopingCount = 0; loopingCount<6; loopingCount++)
+            for (int loopCount = 0; loopCount <= 2; loopCount++)
             {
                 Thread thread = Thread.CurrentThread;
-                Console.WriteLine("Name of Thread: " + thread.Name + " = " + loopingCount);
-                Thread.Sleep(1500);
+                Console.WriteLine("Name of Thread: " + thread.Name + " = " + loopCount);
+                Thread.Sleep(500);
             }
         }
+
+        public static void Thread2()
+        {
+            for (int loopCount = 0; loopCount <= 5; loopCount++)
+            {
+                Thread thread = Thread.CurrentThread;
+                Console.WriteLine("Name of Thread: " + thread.Name + " = " + loopCount);
+                Thread.Sleep(1510);
+            }
+        }
+      }
     }
-}
