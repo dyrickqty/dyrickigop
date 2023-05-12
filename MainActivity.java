@@ -1,10 +1,13 @@
-package com.example.lifecycle;
+package com.example.messagedisplay;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.Toast;
-
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -12,36 +15,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toast.makeText(getApplicationContext(), "Created!", Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Toast.makeText(getApplicationContext(), "Started!", Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Toast.makeText(getApplicationContext(), "Resumed!", Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Toast.makeText(getApplicationContext(), "Paused!", Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Toast.makeText(getApplicationContext(), "Restarted!!", Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Toast.makeText(getApplicationContext(), "Stopped!", Toast.LENGTH_SHORT).show();
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(getApplicationContext(), "Destroyed!", Toast.LENGTH_SHORT).show();
-    }
+        EditText Name1 = findViewById(R.id.Name1);
+        EditText Name2 = findViewById(R.id.Name2);
+        Button swapBtn = findViewById(R.id.swapBtn);
+        Button checkBtn = findViewById(R.id.checkBtn);
+
+        swapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name1 = Name1.getText().toString();
+                String name2 = Name2.getText().toString();
+
+                Name1.setText(name2);
+                Name2.setText(name1);
+            }
+        });
+        checkBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name1 = Name1.getText().toString();
+                String name2 = Name2.getText().toString();
+
+                String Message = "";
+                if (name1.equals(name2)) {
+                    Message = "SAME";
+                }
+                else{
+                    Message = "NOT THE SAME";
+                }
+                Intent intent = new Intent(MainActivity.this, MessageDisplay.class);
+                intent.putExtra("output", Message);
+                startActivity(intent);
+            }
+        });
+    };
+
 }
